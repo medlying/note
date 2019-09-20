@@ -1,0 +1,19 @@
+redis持久化：
+RDB：每隔一段时间写一份数据快照
+AOF：将写操作的日志记录在日志文件中
+
+RDB配置：
+save 60 1000 在60中有至少1000次键改动时自动存储数据集到磁盘
+
+AOF配置：
+1.修改redis.conf配置文件，将appendonly从no改为yes
+2.再修改appendfsync：
+    appendfsync aways 每次收到写命令就立即写入磁盘，性能最差，能够保证完全的持久化
+    appendfsync everysec 每秒强制将写命令写入磁盘，在性能和持久化方面比较折中
+    appendfsync no 完全依赖os，性能最好，但不保证持久化
+
+
+redis集群方式:
+1.主从复制
+2.哨兵
+3.集群
